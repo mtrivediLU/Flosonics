@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory Analysis Dashboard</title>
+    <!-- Linking Google Fonts for Typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- Internal CSS for Styling -->
+    <style>
+        /* Reset some default styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            height: 100%;
+            width: 100%;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 600;
+            margin: 10px 0;
+            color: #444;
+            text-align: center;
+            width: 100%;
+        }
+
+        .container {
+            width: 80vw; /* 80% of viewport width */
+            height: 80vh; /* 80% of viewport height */
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .footer {
+            font-size: 0.8rem;
+            color: #888;
+            text-align: center;
+            padding: 5px 0;
+            width: 80vw;
+        }
+
+        .button-container {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .button-container button {
+            margin: 5px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .button-container button:hover {
+            background-color: #0056b3;
+        }
+
+        .project-overview {
+            text-align: left;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            max-width: 900px;
+            margin: 20px auto;
+        }
+
+        .project-overview h2 {
+            color: #444;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .project-overview p, .project-overview ul {
+            line-height: 1.5;
+            margin-bottom: 15px;
+            color: #555;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .download-button {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .download-button a {
+            display: inline-block;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            background-color: #28a745;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .download-button a:hover {
+            background-color: #218838;
+        }
+
+        @media (max-width: 1200px) {
+            .container {
+                width: 90vw;
+                height: 75vh;
+            }
+            .footer {
+                width: 90vw;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+            .container {
+                width: 95vw;
+                height: 70vh;
+            }
+            .footer {
+                width: 95vw;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Inventory Analysis Dashboard</h1>
+    <!-- Buttons for switching pages -->
+    <div class="button-container">
+        <button onclick="showSection('projectRequirement')">Project Requirement</button>
+        <button onclick="showSection('dataCleaningModeling')">Data Cleaning & Modeling</button>
+        <button onclick="showSection('report1')">Inventory Analysis with Transformed Data</button>
+        <button onclick="showSection('report2')">Inventory Analysis with Clean Transformed Data</button>
+        <button onclick="showSection('report3')">Inventory Analysis Excluding Pilot Site</button>
+        <button onclick="showSection('downloadResources')">Download Resources, Code & Files</button>
+    </div>
+
+    <!-- Project Requirement Section -->
+    <div id="projectRequirement" class="project-overview hidden">
+        <h2>Inventory Analysis for Ready-to-Use Device Stock</h2>
+        <p><strong>Project Overview:</strong> The goal of this project is to analyze the current inventory of medical devices across hospital sites in preparation for Q4 shipments. You’ll be working with raw data from Q3 to clean, model, and analyze device inventory, including identifying discrepancies and devices rendered unusable due to critical battery levels.</p>
+
+        <h3>Top Priority Objective:</h3>
+        <p>Deliver a clean, analyzed dataset with insights into the inventory status of ready-to-use devices across sites. The deliverables include cleaned data, analysis scripts, visualizations, and a final report with findings and recommendations.</p>
+
+        <h3>Task Breakdown & Deliverables:</h3>
+        <ul>
+            <li><strong>Data Cleaning and Preparation</strong>: Clean and structure the raw data provided. Exclude pilot sites based on customer_id.</li>
+            <li><strong>Data Modeling and KPIs</strong>: Model the cleaned data and calculate key metrics.</li>
+            <li><strong>Inventory Analysis and Visualizations</strong>: Analyze the inventory levels across sites and create visualizations.</li>
+            <li><strong>Reporting and Insights</strong>: Summarize findings and provide actionable insights with visualizations.</li>
+        </ul>
+
+        <h3>Post-Priority Tasks (Optional if Time Permits):</h3>
+        <ul>
+            <li>Data Quality Monitoring KPIs</li>
+            <li>Automation</li>
+            <li>Ongoing Stakeholder Communication</li>
+        </ul>
+
+        <h3>Summary of Deliverables:</h3>
+        <ul>
+            <li>Cleaned datasets (CSV/Excel)</li>
+            <li>Modeled data with KPIs (CSV/Excel)</li>
+            <li>Visualizations (PNG/JPG)</li>
+            <li>Final Report (Word/PDF)</li>
+        </ul>
+    </div>
+
+    <!-- Data Cleaning & Modeling Section -->
+    <div id="dataCleaningModeling" class="project-overview hidden">
+        <h2>Data Cleaning and Preparation</h2>
+        <p><strong>Objective:</strong> The primary objective was to clean and structure the raw data from the four provided files: Q3_shipping, Q3_sessions, Q3_device_logs, and Q3_customer_order to prepare them for accurate analysis.</p>
+
+        <h3>Process:</h3>
+        <p><strong>Loading and Handling Missing Values:</strong> We loaded each dataset and handled missing values, replacing or removing invalid entries. Inconsistent data types were corrected.</p>
+        <p><strong>Standardizing Date Formats and Timestamps:</strong> Dates were standardized to ensure consistency across all files (e.g., "YYYY-MM-DD").</p>
+        <p><strong>Transformations for Key Fields:</strong> Columns such as StandardFlopatchID, StandardDateFirstUse, and StandardDateLastUse were transformed to ensure consistency.</p>
+        <p><strong>Error Handling with Placeholders:</strong> Instead of removing rows, placeholders were used for missing or erroneous data to preserve context.</p>
+
+        <h3>Data Cleaning Process:</h3>
+        <p><strong>Cleaning Invalid flopatch_id Entries:</strong> Removed rows with invalid values (e.g., NULL, -1, Error).</p>
+        <p><strong>Handling Invalid date_delivered Entries:</strong> Removed rows with invalid or missing dates, like "1900-01-01" or NULL.</p>
+        <p><strong>Bad Data Reference Table:</strong> Created a reference table for all rows removed during cleaning for future data quality improvements.</p>
+        <p><strong>Excluding Pilot Sites:</strong> Pilot sites were filtered out, ensuring analysis focused on operational hospitals.</p>
+
+        <h3>Final Data Sets:</h3>
+        <ul>
+            <li><strong>Inventory Analysis with Transformed Data</strong>: All data, including errors.</li>
+            <li><strong>Inventory Analysis with Clean Transformed Data</strong>: Only valid, clean data.</li>
+            <li><strong>Inventory Analysis Excluding Pilot Sites</strong>: Clean data, excluding pilot sites.</li>
+            <li><strong>Bad Data Table:</strong> Rows removed due to bad data.</li>
+        </ul>
+    </div>
+
+    <!-- Iframes for Power BI Reports with the new message -->
+<div class="container hidden" id="report1">
+    <iframe 
+        title="Inventory Analysis with Transformed Data"
+        src="https://app.powerbi.com/view?r=eyJrIjoiMmFlMjllYmMtMTk2Yi00ZTkwLWE0ODQtNzBmOTQ1OTZjZGJiIiwidCI6Ijk3NTEzZjM3LWEyZTgtNGVkZi1hODNkLTMyODY5NjEzYWUwYyJ9"
+        allowFullScreen="true"
+        style="height: 90%;">
+    </iframe>
+    <div class="footer" style="font-size: 18px;">
+        <p>There are a total of 14 visualizations on this page. Please click on the next or previous button for navigation at the bottom.</p>
+    </div>
+</div>
+
+<div class="container hidden" id="report2">
+    <iframe 
+        title="Inventory Analysis with Clean Transformed Data"
+        src="https://app.powerbi.com/view?r=eyJrIjoiZWZhNDM2YzgtNjgxNi00OTM2LThjYTQtNTA1Zjk4MTVkYjFlIiwidCI6Ijk3NTEzZjM3LWEyZTgtNGVkZi1hODNkLTMyODY5NjEzYWUwYyJ9"
+        allowFullScreen="true"
+        style="height: 90%;">
+    </iframe>
+    <div class="footer" style="font-size: 18px;">
+        <p>There are a total of 14 visualizations on this page. Please click on the next or previous button for navigation at the bottom.</p>
+    </div>
+</div>
+
+<div class="container hidden" id="report3">
+    <iframe 
+        title="Inventory Analysis Excluding Pilot Site"
+        src="https://app.powerbi.com/view?r=eyJrIjoiZmE1MmIxMzctYWQ3Yi00MTc1LWJiMmQtMTAyOTQ3MmI2NGJmIiwidCI6Ijk3NTEzZjM3LWEyZTgtNGVkZi1hODNkLTMyODY5NjEzYWUwYyJ9"
+        allowFullScreen="true"
+        style="height: 90%;">
+    </iframe>
+    <div class="footer" style="font-size: 18px;">
+        <p>There are a total of 14 visualizations on this page. Please click on the next or previous button for navigation at the bottom.</p>
+    </div>
+</div>
+
+
+
+<div class="container hidden" id="report3">
+    <iframe 
+        title="Inventory Analysis Excluding Pilot Site"
+        src="https://app.powerbi.com/view?r=eyJrIjoiZmE1MmIxMzctYWQ3Yi00MTc1LWJiMmQtMTAyOTQ3MmI2NGJmIiwidCI6Ijk3NTEzZjM3LWEyZTgtNGVkZi1hODNkLTMyODY5NjEzYWUwYyJ9"
+        allowFullScreen="true">
+    </iframe>
+    <div class="footer">
+        <p>There are a total of 14 visualizations on this page. Please click on the next or previous button for navigation at the bottom.</p>
+    </div>
+</div>
+
+
+    <!-- Download Resources Section -->
+    <div id="downloadResources" class="project-overview hidden">
+        <h2>Download Resources, Code & Files</h2>
+        <div class="download-button">
+            <a href="https://drive.google.com/drive/folders/18Ez1yfW_tgaR__s02xCYKMZKzYjk29Cz?usp=sharing" target="_blank">Download Resources</a>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>For Internal Use Only</p>
+    </div>
+
+    <script>
+        // Function to switch between different sections/pages
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('.container, .project-overview');
+            sections.forEach(section => {
+                section.classList.add('hidden');
+            });
+            document.getElementById(sectionId).classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
