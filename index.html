@@ -27,56 +27,63 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
         }
 
         h1 {
             font-size: 2rem;
             font-weight: 600;
-            margin: 10px 0;
+            margin: 20px 0;
             color: #444;
             text-align: center;
             width: 100%;
         }
 
         .container {
-            width: 80vw; /* 80% of viewport width */
-            height: 80vh; /* 80% of viewport height */
+            width: 100%;
+            max-width: 1000px;
+            height: 70vh;
             background-color: #fff;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             border-radius: 10px;
             position: relative;
             overflow: hidden;
+            margin-bottom: 20px;
         }
 
         iframe {
             width: 100%;
-            height: 100%;
+            height: 90%;
             border: none;
         }
 
         .footer {
-            font-size: 0.8rem;
+            font-size: 18px;
             color: #888;
             text-align: center;
-            padding: 5px 0;
-            width: 80vw;
+            padding: 10px 0;
+            background-color: #fff;
+            width: 100%;
         }
 
         .button-container {
             text-align: center;
-            margin-bottom: 15px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 20px;
         }
 
         .button-container button {
-            margin: 5px;
-            padding: 10px 20px;
+            margin: 10px;
+            padding: 12px 20px;
             font-size: 1rem;
             background-color: #007bff;
             color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            min-width: 250px;
         }
 
         .button-container button:hover {
@@ -128,10 +135,11 @@
             background-color: #218838;
         }
 
+        /* Media Queries */
         @media (max-width: 1200px) {
             .container {
                 width: 90vw;
-                height: 75vh;
+                height: 70vh;
             }
             .footer {
                 width: 90vw;
@@ -140,14 +148,32 @@
 
         @media (max-width: 768px) {
             h1 {
+                font-size: 1.8rem;
+            }
+            .container {
+                width: 95vw;
+                height: 65vh;
+            }
+            .footer {
+                width: 95vw;
+            }
+            .button-container button {
+                min-width: 220px;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
                 font-size: 1.5rem;
             }
             .container {
                 width: 95vw;
-                height: 70vh;
+                height: 60vh;
             }
-            .footer {
-                width: 95vw;
+            .button-container button {
+                min-width: 180px;
+                font-size: 0.8rem;
             }
         }
     </style>
@@ -167,7 +193,7 @@
     <!-- Project Requirement Section -->
     <div id="projectRequirement" class="project-overview hidden">
         <h2>Inventory Analysis for Ready-to-Use Device Stock</h2>
-        <p><strong>Project Overview:</strong> The goal of this project is to analyze the current inventory of medical devices across hospital sites in preparation for Q4 shipments. Mihir will be working with raw data from Q3 to clean, model, and analyze device inventory, including identifying discrepancies and devices rendered unusable due to critical battery levels.</p>
+        <p><strong>Project Overview:</strong> The goal of this project is to analyze the current inventory of medical devices across hospital sites in preparation for Q4 shipments. You’ll be working with raw data from Q3 to clean, model, and analyze device inventory, including identifying discrepancies and devices rendered unusable due to critical battery levels.</p>
 
         <h3>Top Priority Objective:</h3>
         <p>Deliver a clean, analyzed dataset with insights into the inventory status of ready-to-use devices across sites. The deliverables include cleaned data, analysis scripts, visualizations, and a final report with findings and recommendations.</p>
@@ -179,14 +205,6 @@
             <li><strong>Inventory Analysis and Visualizations</strong>: Analyze the inventory levels across sites and create visualizations.</li>
             <li><strong>Reporting and Insights</strong>: Summarize findings and provide actionable insights with visualizations.</li>
         </ul>
-
-        <h3>Post-Priority Tasks (Optional if Time Permits):</h3>
-        <ul>
-            <li>Data Quality Monitoring KPIs</li>
-            <li>Automation</li>
-            <li>Ongoing Stakeholder Communication</li>
-        </ul>
-
     </div>
 
     <!-- Data Cleaning & Modeling Section -->
@@ -200,12 +218,6 @@
         <p><strong>Transformations for Key Fields:</strong> Columns such as StandardFlopatchID, StandardDateFirstUse, and StandardDateLastUse were transformed to ensure consistency.</p>
         <p><strong>Error Handling with Placeholders:</strong> Instead of removing rows, placeholders were used for missing or erroneous data to preserve context.</p>
 
-        <h3>Data Cleaning Process:</h3>
-        <p><strong>Cleaning Invalid flopatch_id Entries:</strong> Removed rows with invalid values (e.g., NULL, -1, Error).</p>
-        <p><strong>Handling Invalid date_delivered Entries:</strong> Removed rows with invalid or missing dates, like "1900-01-01" or NULL.</p>
-        <p><strong>Bad Data Reference Table:</strong> Created a reference table for all rows removed during cleaning for future data quality improvements.</p>
-        <p><strong>Excluding Pilot Sites:</strong> Pilot sites were filtered out, ensuring analysis focused on operational hospitals.</p>
-
         <h3>Final Data Sets:</h3>
         <ul>
             <li><strong>Inventory Analysis with Transformed Data</strong>: All data, including errors.</li>
@@ -216,55 +228,38 @@
     </div>
 
     <!-- Iframes for Power BI Reports with the new message -->
-<div class="container hidden" id="report1">
-    <iframe 
-        title="Inventory Analysis with Transformed Data"
-        src="https://app.powerbi.com/view?r=eyJrIjoiMmFlMjllYmMtMTk2Yi00ZTkwLWE0ODQtNzBmOTQ1OTZjZGJiIiwidCI6Ijk3NTEzZjM3LWEyZTgtNGVkZi1hODNkLTMyODY5NjEzYWUwYyJ9"
-        allowFullScreen="true"
-        style="height: 90%;">
-    </iframe>
-    <div class="footer" style="font-size: 18px;">
-        <p>There are a total of 14 visualizations on this page. Please click on the next or previous button for navigation at the bottom.</p>
+    <div class="container hidden" id="report1">
+        <iframe 
+            title="Inventory Analysis with Transformed Data"
+            src="https://app.powerbi.com/view?r=eyJrIjoiMmFlMjllYmMtMTk2Yi00ZTkwLWE0ODQtNzBmOTQ1OTZjZGJiIiwidCI6Ijk3NTEzZjM3LWEyZTgtNGVkZi1hODNkLTMyODY5NjEzYWUwYyJ9"
+            allowFullScreen="true">
+        </iframe>
+        <div class="footer">
+            <p>There are a total of 14 visualizations on this page. Please click on the next or previous button for navigation at the bottom.</p>
+        </div>
     </div>
-</div>
 
-<div class="container hidden" id="report2">
-    <iframe 
-        title="Inventory Analysis with Clean Transformed Data"
-        src="https://app.powerbi.com/view?r=eyJrIjoiZmE1MmIxMzctYWQ3Yi00MTc1LWJiMmQtMTAyOTQ3MmI2NGJmIiwidCI6Ijk3NTEzZjM3LWEyZTgtNGVkZi1hODNkLTMyODY5NjEzYWUwYyJ9"
-        allowFullScreen="true"
-        style="height: 90%;">
-    </iframe>
-    <div class="footer" style="font-size: 18px;">
-        <p>There are a total of 14 visualizations on this page. Please click on the next or previous button for navigation at the bottom.</p>
+    <div class="container hidden" id="report2">
+        <iframe 
+            title="Inventory Analysis with Clean Transformed Data"
+            src="https://app.powerbi.com/view?r=eyJrIjoiZWZhNDM2YzgtNjgxNi00OTM2LThjYTQtNTA1Zjk4MTVkYjFlIiwidCI6Ijk3NTEzZjM3LWEyZTgtNGVkZi1hODNkLTMyODY5NjEzYWUwYyJ9"
+            allowFullScreen="true">
+        </iframe>
+        <div class="footer">
+            <p>There are a total of 14 visualizations on this page. Please click on the next or previous button for navigation at the bottom.</p>
+        </div>
     </div>
-</div>
 
-<div class="container hidden" id="report3">
-    <iframe 
-        title="Inventory Analysis with Clean Transformed Data Excluding Pilot Site"
-        src="https://app.powerbi.com/view?r=eyJrIjoiZWZhNDM2YzgtNjgxNi00OTM2LThjYTQtNTA1Zjk4MTVkYjFlIiwidCI6Ijk3NTEzZjM3LWEyZTgtNGVkZi1hODNkLTMyODY5NjEzYWUwYyJ9"
-        allowFullScreen="true"
-        style="height: 90%;">
-    </iframe>
-    <div class="footer" style="font-size: 18px;">
-        <p>There are a total of 14 visualizations on this page. Please click on the next or previous button for navigation at the bottom.</p>
+    <div class="container hidden" id="report3">
+        <iframe 
+            title="Inventory Analysis Excluding Pilot Site"
+            src="https://app.powerbi.com/view?r=eyJrIjoiZmE1MmIxMzctYWQ3Yi00MTc1LWJiMmQtMTAyOTQ3MmI2NGJmIiwidCI6Ijk3NTEzZjM3LWEyZTgtNGVkZi1hODNkLTMyODY5NjEzYWUwYyJ9"
+            allowFullScreen="true">
+        </iframe>
+        <div class="footer">
+            <p>There are a total of 14 visualizations on this page. Please click on the next or previous button for navigation at the bottom.</p>
+        </div>
     </div>
-</div>
-
-
-
-<div class="container hidden" id="report3">
-    <iframe 
-        title="Inventory Analysis Excluding Pilot Site"
-        src="https://app.powerbi.com/view?r=eyJrIjoiZmE1MmIxMzctYWQ3Yi00MTc1LWJiMmQtMTAyOTQ3MmI2NGJmIiwidCI6Ijk3NTEzZjM3LWEyZTgtNGVkZi1hODNkLTMyODY5NjEzYWUwYyJ9"
-        allowFullScreen="true">
-    </iframe>
-    <div class="footer">
-        <p>There are a total of 14 visualizations on this page. Please click on the next or previous button for navigation at the bottom.</p>
-    </div>
-</div>
-
 
     <!-- Download Resources Section -->
     <div id="downloadResources" class="project-overview hidden">
@@ -272,10 +267,6 @@
         <div class="download-button">
             <a href="https://drive.google.com/drive/folders/18Ez1yfW_tgaR__s02xCYKMZKzYjk29Cz?usp=sharing" target="_blank">Download Resources</a>
         </div>
-    </div>
-
-    <div class="footer">
-        <p>For Internal Use Only</p>
     </div>
 
     <script>
