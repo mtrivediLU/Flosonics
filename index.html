@@ -92,24 +92,52 @@
 
         .project-overview {
             text-align: left;
-            padding: 20px;
+            padding: 25px 40px;
             background-color: #fff;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             border-radius: 10px;
             max-width: 900px;
             margin: 20px auto;
+            line-height: 1.75;
         }
 
         .project-overview h2 {
             color: #444;
             font-weight: 600;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
         }
 
-        .project-overview p, .project-overview ul {
-            line-height: 1.5;
-            margin-bottom: 15px;
+        .project-overview h3 {
             color: #555;
+            font-weight: 500;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        .project-overview p {
+            margin-bottom: 15px;
+            font-size: 1rem;
+            color: #666;
+        }
+
+        .project-overview ul {
+            margin-bottom: 15px;
+            color: #666;
+            font-size: 1rem;
+            padding-left: 40px;
+            list-style-type: disc;
+        }
+
+        .project-overview ul li {
+            margin-bottom: 10px;
+        }
+
+        .highlight {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #007bff;
+            margin-bottom: 15px;
         }
 
         .hidden {
@@ -133,6 +161,25 @@
 
         .download-button a:hover {
             background-color: #218838;
+        }
+
+        .back-to-top {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .back-to-top button {
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .back-to-top button:hover {
+            background-color: #0056b3;
         }
 
         /* Media Queries */
@@ -188,12 +235,15 @@
         <button onclick="showSection('report2')">Inventory Analysis with Clean Transformed Data</button>
         <button onclick="showSection('report3')">Inventory Analysis Excluding Pilot Site</button>
         <button onclick="showSection('downloadResources')">Download Resources, Code & Files</button>
+        <button onclick="showSection('inventorySummary')">Inventory Analysis Summary</button>
     </div>
 
     <!-- Project Requirement Section -->
     <div id="projectRequirement" class="project-overview hidden">
         <h2>Inventory Analysis for Ready-to-Use Device Stock</h2>
-        <p><strong>Project Overview:</strong> The goal of this project is to analyze the current inventory of medical devices across hospital sites in preparation for Q4 shipments. You’ll be working with raw data from Q3 to clean, model, and analyze device inventory, including identifying discrepancies and devices rendered unusable due to critical battery levels.</p>
+        <div class="highlight">
+            <p><strong>Project Overview:</strong> The goal of this project is to analyze the current inventory of medical devices across hospital sites in preparation for Q4 shipments. You’ll be working with raw data from Q3 to clean, model, and analyze device inventory, including identifying discrepancies and devices rendered unusable due to critical battery levels.</p>
+        </div>
 
         <h3>Top Priority Objective:</h3>
         <p>Deliver a clean, analyzed dataset with insights into the inventory status of ready-to-use devices across sites. The deliverables include cleaned data, analysis scripts, visualizations, and a final report with findings and recommendations.</p>
@@ -210,7 +260,9 @@
     <!-- Data Cleaning & Modeling Section -->
     <div id="dataCleaningModeling" class="project-overview hidden">
         <h2>Data Cleaning and Preparation</h2>
-        <p><strong>Objective:</strong> The primary objective was to clean and structure the raw data from the four provided files: Q3_shipping, Q3_sessions, Q3_device_logs, and Q3_customer_order to prepare them for accurate analysis.</p>
+        <div class="highlight">
+            <p><strong>Objective:</strong> The primary objective was to clean and structure the raw data from the four provided files: Q3_shipping, Q3_sessions, Q3_device_logs, and Q3_customer_order to prepare them for accurate analysis.</p>
+        </div>
 
         <h3>Process:</h3>
         <p><strong>Loading and Handling Missing Values:</strong> We loaded each dataset and handled missing values, replacing or removing invalid entries. Inconsistent data types were corrected.</p>
@@ -227,7 +279,60 @@
         </ul>
     </div>
 
-    <!-- Iframes for Power BI Reports with the new message -->
+    <!-- New Inventory Analysis Summary Section -->
+<div id="inventorySummary" class="project-overview hidden">
+    <h2>Inventory Analysis Project Summary</h2>
+
+    <h3>Overview</h3>
+    <p>The primary goal of this analysis was to assess the device inventory from shipment to usage, identifying any discrepancies and areas for improvement. I have developed three key visualizations, each focusing on different aspects of the dataset:</p>
+
+    <ul>
+        <li><strong>Inventory Analysis with Transformed Data</strong> – Includes all data, providing a comprehensive view of device shipments and usage, including errors.</li>
+        <li><strong>Inventory Analysis with Clean Transformed Data</strong> – Focuses on valid data, excluding errors, to present a clearer picture of device performance.</li>
+        <li><strong>Inventory Analysis with Clean Transformed Data Excluding Pilot Sites</strong> – Offers a targeted analysis that excludes data from pilot sites with limited shipments, to better reflect real-world operations.</li>
+    </ul>
+
+    <h3>Key Problems Identified</h3>
+    <ul>
+        <li><strong>NULL or Invalid Device IDs (flopatch_id):</strong> The Transformed Data set highlighted 8 devices with invalid or missing IDs in the shipment table. This was resolved in both the Clean Data and Excluding Pilot Sites datasets, reflecting successful data correction efforts.</li>
+
+        <li><strong>Devices Without Delivery Dates:</strong> In the Transformed Data, 32 customer orders in the customer order table did not have delivery dates, and 110 devices in the shipment table were missing delivery dates. These gaps in data were fully addressed in the Clean Data, ensuring accurate shipment tracking.</li>
+
+        <li><strong>Critical Battery Issues:</strong> Across all datasets, 13 devices were marked as unusable due to critical battery issues, of which 2 devices became unusable within the last 30 days. This emphasizes the need for better battery monitoring to prevent device downtime.</li>
+
+        <li><strong>Refurbished Devices:</strong> A total of 39 devices were shipped to customers after their first refurbishment, and 1 device was shipped after a second refurbishment. This was observed in both the shipment and customer order tables, providing a clear view of the refurbishing process and ensuring that devices are tracked post-refurbishment.</li>
+
+        <li><strong>Sessions per Device and Device Usage:</strong> The Sessions Per Device metric remained steady across all datasets at 1.83–1.84, with 110 devices being used multiple times. This consistency in usage suggests that devices are being regularly utilized, and performance remains stable across the board.</li>
+
+        <li><strong>Shipping Delays:</strong> Across all datasets, 40 shipments experienced delays, indicating potential logistical bottlenecks that should be addressed. This issue was observed consistently, regardless of data cleaning or excluding pilot sites.</li>
+    </ul>
+
+    <h3>Proposed Solutions</h3>
+    <p>To address the key issues identified, the following solutions are proposed:</p>
+
+    <ul>
+        <li><strong>Improving Data Quality:</strong> By cleaning and removing erroneous entries (such as devices missing delivery dates or invalid IDs), future analyses will be more accurate and actionable.</li>
+        <li><strong>Optimizing the Shipment Process:</strong> Focus on reducing delayed shipments by enhancing shipment tracking and management. Implement alert systems for shipments that are delayed or lack delivery dates, addressing issues before they escalate.</li>
+        <li><strong>Proactive Battery Monitoring:</strong> Set up alerts for critical battery levels, enabling timely interventions before device failures occur. Refurbishment processes can be refined to extend device life and minimize the need for second refurbishments.</li>
+        <li><strong>Device Utilization Improvement:</strong> Investigate why some devices are not being used post-shipment. Improve coordination with hospitals and clients to ensure devices are used efficiently upon receipt, reducing waiting times for first use.</li>
+    </ul>
+
+    <h3>Expected Outcomes</h3>
+    <p>By implementing the proposed solutions, the following outcomes are expected:</p>
+
+    <ul>
+        <li><strong>Enhanced Efficiency:</strong> With cleaner data, stakeholders can make more reliable decisions regarding shipments and usage, reducing delays and operational costs related to mismanagement of devices. Improved delivery tracking and reduced errors will lead to higher customer satisfaction and fewer shipment backlogs.</li>
+
+        <li><strong>Improved Device Longevity:</strong> By addressing battery issues early and reducing unnecessary refurbishments, device downtime will be minimized, and operational efficiency will improve.</li>
+
+        <li><strong>Better Device Usage:</strong> More consistent use of devices upon shipment will ensure hospitals maximize the return on investment (ROI) on their inventory, with fewer devices sitting idle. Prompt use of devices post-shipment can optimize the overall performance and delivery of medical services.</li>
+
+        <li><strong>Trustworthy Data-Driven Insights:</strong> With valid and reliable data, management can make more confident decisions about future device orders, shipment, and refurbishment, improving overall inventory management. Excluding pilot site data allows for a more accurate view of how devices are being used in real-world settings, helping to inform future strategic decisions.</li>
+    </ul>
+</div>
+
+
+    <!-- Iframes for Power BI Reports -->
     <div class="container hidden" id="report1">
         <iframe 
             title="Inventory Analysis with Transformed Data"
@@ -269,6 +374,11 @@
         </div>
     </div>
 
+    <!-- Back to Top Button Section -->
+    <div class="back-to-top">
+        <button onclick="scrollToTop()">Back to Top</button>
+    </div>
+
     <script>
         // Function to switch between different sections/pages
         function showSection(sectionId) {
@@ -277,6 +387,11 @@
                 section.classList.add('hidden');
             });
             document.getElementById(sectionId).classList.remove('hidden');
+        }
+
+        // Function to scroll back to the top of the page
+        function scrollToTop() {
+            window.scrollTo({top: 0, behavior: 'smooth'});
         }
     </script>
 </body>
